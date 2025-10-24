@@ -231,7 +231,7 @@ body.denied {
 
   .character {
     position: absolute;
-    width: 100px;
+    width: 150px;
     bottom: 0;
   }
 
@@ -248,7 +248,7 @@ body.denied {
     position: absolute;
     width: 80px;
     right: -30px;
-    bottom: 30px;
+    bottom: 0;
   }
 
   .exc {
