@@ -43,7 +43,7 @@ body.denied {
 .obstacle {
   position: absolute;
   width: 140px;
-  bottom: 30px;
+  bottom: 0;
   right: -50px;
 }
 .exc {
