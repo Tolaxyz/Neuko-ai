@@ -34,9 +34,26 @@ function initializeGame() {
   let obstacleLeft = 1000;
   let animationFrameId = null;
 
+  // 🆕 Running animation variables
+  let runFrame = 0;
+  let runInterval = null;
+  const runImages = [
+    "images/character_run1.png", // first running frame
+    "images/character_run2.png", // second running frame
+  ];
+
   function jump() {
     if (isJumping || isPaused || !isGameStarted) return;
     isJumping = true;
+
+    // stop running animation while jumping
+    stopRunningAnimation();
+
+    // Optional jump sprite
+    if (characterJumpImageExists()) {
+      character.src = "images/character_jump.png";
+    }
+
     let position = 0;
 
     const upInterval = setInterval(() => {
@@ -48,6 +65,8 @@ function initializeGame() {
           if (position <= 0) {
             clearInterval(downInterval);
             isJumping = false;
+            // resume running animation after landing
+            if (isGameStarted && !isPaused) startRunningAnimation();
           } else {
             position -= 5;
             character.style.bottom = position + "px";
@@ -85,6 +104,7 @@ function initializeGame() {
       restartBtn.classList.add("hidden");
       pauseBtn.disabled = false;
       startBtn.style.display = "none";
+      startRunningAnimation(); // 🆕 start sprite animation
       moveObstacle();
     }
   });
@@ -93,8 +113,13 @@ function initializeGame() {
     if (!isGameStarted) return;
     isPaused = !isPaused;
     pauseBtn.textContent = isPaused ? "Resume" : "Pause";
-    if (!isPaused) moveObstacle();
-    else cancelAnimationFrame(animationFrameId);
+    if (isPaused) {
+      cancelAnimationFrame(animationFrameId);
+      stopRunningAnimation(); // 🆕 pause sprite
+    } else {
+      startRunningAnimation(); // 🆕 resume sprite
+      moveObstacle();
+    }
   });
 
   function endGame() {
@@ -102,6 +127,7 @@ function initializeGame() {
     isGameStarted = false;
     cancelAnimationFrame(animationFrameId);
     pauseBtn.disabled = true;
+    stopRunningAnimation(); // 🆕 stop running loop
     gameOverText.classList.remove("hidden");
     restartBtn.classList.remove("hidden");
   }
@@ -138,6 +164,29 @@ function initializeGame() {
     restartBtn.classList.add("hidden");
     pauseBtn.disabled = false;
     pauseBtn.textContent = "Pause";
+    startRunningAnimation(); // 🆕 resume animation
     moveObstacle();
   });
+
+  // 🆕 Sprite animation (simple 2-frame loop)
+  function startRunningAnimation() {
+    if (runInterval) clearInterval(runInterval);
+    runInterval = setInterval(() => {
+      runFrame = (runFrame + 1) % runImages.length;
+      if (!isJumping) {
+        character.src = runImages[runFrame];
+      }
+    }, 150); // every 150ms switch frame
+  }
+
+  function stopRunningAnimation() {
+    clearInterval(runInterval);
+  }
+
+  // 🆕 Helper: check if jump sprite exists
+  function characterJumpImageExists() {
+    const img = new Image();
+    img.src = "images/character_jump.png";
+    return true; // you can remove this check if always exists
+  }
 }
