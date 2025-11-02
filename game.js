@@ -1,4 +1,4 @@
-const validPassword = "Snakes";
+const validPassword = "smol-iq";
 
 function checkPassword() {
   const input = document.getElementById("passwordInput").value;

@@ -25,7 +25,7 @@ body.denied {
 }
 .character {
   position: absolute;
-  width: 380px;
+  width: 100px;
   bottom: 0;
   left: 50px;
 }
@@ -59,7 +59,7 @@ body.denied {
   left: 10px;
   font-size: 30px;
   font-weight: bold;
-  color: rgb(204, 79, 79);
+  color: rgb(202, 199, 199);
 }
 #pauseBtn {
   position: absolute;
@@ -88,14 +88,14 @@ body.denied {
   font-size: 20px;
   cursor: pointer;
   border-radius: 20px;
-  background-color: rgb(204, 79, 79);
+  background-color: #888;
   color: white;
   border: none;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 #startBtn:hover {
-  background-color: rgb(204, 79, 79);
+  background-color: #888;
   transform: scale(1.1);
 }
 .red {
@@ -128,7 +128,7 @@ body.denied {
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: 100px;
   font-weight: bold;
-  color: rgb(204, 79, 79);
+  color: #888;
   text-shadow: 1px 1px 2px black;
   z-index: 10;
 }
@@ -157,7 +157,7 @@ body.denied {
   font-family: "Comic Sans MS", cursive;
   font-weight: bold;
   color: white;
-  background-color: rgb(204, 79, 79);
+  background-color: #888;
   border: none;
   border-radius: 12px;
   cursor: pointer;
